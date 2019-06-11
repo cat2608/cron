@@ -1,16 +1,19 @@
 const test = require('tape');
 const { isForToday } = require('../src/taskDay');
 
-const cronTab = '30 1';
+test('it should check if task will run today', (t) => {
+  const currentTime = '00:15';
+  const cronTabConfig = ['0 15', '15 15', '0 0', '15 0', '* 10', '* *', '33 *', '10 *'];
+  const results = [true, true, false, true, true, true, true, false];
 
-test('it should check if task is for today', (t) => {
-  const currentTime = '00:10';
-  t.equal(isForToday(currentTime, cronTab), true);
-  t.end();
-});
+  for (let i = 0; i < cronTabConfig.length; i++) {
+    const isToday = isForToday(currentTime, cronTabConfig[i]);
+    t.equal(
+      isToday, results[i],
+      `Time: ${currentTime} - Cron: ${cronTabConfig[i]} -
+      This task will run ${isToday ? 'today' : 'tomorrow'}`,
+    );
+  }
 
-test('it should check if task will run tomorrow', (t) => {
-  const currentTime = '16:10';
-  t.equal(isForToday(currentTime, cronTab), false);
   t.end();
 });
