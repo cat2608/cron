@@ -6,4 +6,8 @@ const isForToday = (currentTime, cronTab) => {
   return currentHour < cronTabHour;
 };
 
-module.exports = { isForToday };
+const getTaskDay = (currentTime, cronTab) => {
+  return isForToday(currentTime, cronTab) ? 'today' : 'tomorrow';
+};
+
+module.exports = { isForToday, getTaskDay };

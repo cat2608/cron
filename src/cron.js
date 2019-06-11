@@ -1,5 +1,7 @@
 const { extractHourAndMinFromCurrentTime, extractHourAndMinFromCronTab } = require('./extractHourAndMinutes');
 
+const { getTaskDay } = require('./taskDay');
+
 const parseHour = (hour) => {
   if (hour.split('').length === 1) {
     return `0${hour}`;
@@ -33,4 +35,8 @@ const getScheduleTime = (currentTime, cronTab) => {
   return `${scheduleTime.hour}:${scheduleTime.min}`;
 };
 
-module.exports = { getScheduleTime };
+const getScheduleTimeWithDay = (currentTime, cronTab) => {
+  return `${getScheduleTime(currentTime, cronTab)} ${getTaskDay(currentTime, cronTab)}`;
+};
+
+module.exports = { getScheduleTime, getScheduleTimeWithDay };
