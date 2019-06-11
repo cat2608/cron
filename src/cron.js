@@ -39,4 +39,8 @@ const getScheduleTimeWithDay = (currentTime, cronTab) => {
   return `${getScheduleTime(currentTime, cronTab)} ${getTaskDay(currentTime, cronTab)}`;
 };
 
-module.exports = { getScheduleTime, getScheduleTimeWithDay };
+const getCronOutput = (currentTime, cronTab, task) => {
+  return `${getScheduleTime(currentTime, cronTab)} ${getTaskDay(currentTime, cronTab)} - ${task}`;
+};
+
+module.exports = { getScheduleTime, getScheduleTimeWithDay, getCronOutput };
