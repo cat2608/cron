@@ -1,0 +1,18 @@
+{
+  "name": "cron",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:cat2608/cron.git",
+  "author": "cat2608 <cat2608@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "NODE_ENV=dev tape test/**/*.spec.js | tap-spec"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.10.2"
+  }
+}
