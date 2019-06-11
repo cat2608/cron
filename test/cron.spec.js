@@ -1,6 +1,7 @@
 const test = require('tape');
 
-const { isForToday, getScheduleTime } = require('./cron');
+const { getScheduleTime } = require('../src/cron');
+const { isForToday } = require('../src/taskDay');
 
 const cronTab = '30 1';
 const cronTabEveryHour = '30 *';

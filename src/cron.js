@@ -1,18 +1,4 @@
-const extractHourAndMinFromCurrentTime = (currentTime) => {
-  const [currentHour, currentMin] = currentTime.split(':');
-  return { currentHour, currentMin };
-};
-
-const extractHourAndMinFromCronTab = (cronTab) => {
-  const [cronTabMin, cronTabHour] = cronTab.split(' ');
-  return { cronTabHour, cronTabMin };
-};
-
-const isForToday = (currentTime, cronTab) => {
-  const { currentHour } = extractHourAndMinFromCurrentTime(currentTime);
-  const { cronTabHour } = extractHourAndMinFromCronTab(cronTab);
-  return currentHour < cronTabHour;
-};
+const { extractHourAndMinFromCurrentTime, extractHourAndMinFromCronTab } = require('./extractHourAndMinutes');
 
 const parseHour = (hour) => {
   if (hour.split('').length === 1) {
@@ -47,4 +33,4 @@ const getScheduleTime = (currentTime, cronTab) => {
   return `${scheduleTime.hour}:${scheduleTime.min}`;
 };
 
-module.exports = { isForToday, getScheduleTime };
+module.exports = { getScheduleTime };
