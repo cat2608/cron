@@ -14,4 +14,31 @@ const isForToday = (currentTime, cronTab) => {
   return currentHour < cronTabHour;
 };
 
-module.exports = { isForToday };
+const parseHour = (hour) => {
+  if (hour.split('').length === 1) {
+    return `0${hour}`;
+  }
+  return hour;
+};
+
+const isEveryValueTime = (time) => {
+  return time.indexOf('*') !== -1;
+};
+
+const getScheduleTime = (currentTime, cronTab) => {
+  const { cronTabHour, cronTabMin } = extractHourAndMinFromCronTab(cronTab);
+  const scheduleTime = {};
+  const parsedCrontabHour = parseHour(cronTabHour);
+
+  if (!isEveryValueTime(cronTabHour)) {
+    scheduleTime.hour = parsedCrontabHour;
+  }
+
+  if (!isEveryValueTime(cronTabMin)) {
+    scheduleTime.min = cronTabMin;
+  }
+
+  return `${scheduleTime.hour}:${scheduleTime.min}`;
+};
+
+module.exports = { isForToday, getScheduleTime };
