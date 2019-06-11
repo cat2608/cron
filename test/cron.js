@@ -27,11 +27,12 @@ const isEveryValueTime = (time) => {
 
 const getScheduleTime = (currentTime, cronTab) => {
   const { cronTabHour, cronTabMin } = extractHourAndMinFromCronTab(cronTab);
-  const { currentHour } = extractHourAndMinFromCurrentTime(currentTime);
+  const { currentHour, currentMin } = extractHourAndMinFromCurrentTime(currentTime);
   const scheduleTime = {};
   const parsedCrontabHour = parseHour(cronTabHour);
+  const isEveryHour = isEveryValueTime(cronTabHour);
 
-  if (!isEveryValueTime(cronTabHour)) {
+  if (!isEveryHour) {
     scheduleTime.hour = parsedCrontabHour;
   } else {
     scheduleTime.hour = currentHour;
@@ -40,7 +41,7 @@ const getScheduleTime = (currentTime, cronTab) => {
   if (!isEveryValueTime(cronTabMin)) {
     scheduleTime.min = cronTabMin;
   } else {
-    scheduleTime.min = '00';
+    scheduleTime.min = isEveryHour ? currentMin : '00';
   }
 
   return `${scheduleTime.hour}:${scheduleTime.min}`;

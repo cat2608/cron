@@ -5,6 +5,7 @@ const { isForToday, getScheduleTime } = require('./cron');
 const cronTab = '30 1';
 const cronTabEveryHour = '30 *';
 const cronTabEveryMinute = '* 1';
+const cronTabEveryHourAndMinute = '* *';
 
 test('it should check if task is for today', (t) => {
   const currentTime = '00:10';
@@ -43,5 +44,12 @@ test('it should return scheduled minutes equal to 00 when crontab minutes is * a
   const currentTime = '16:10';
   const scheduleTime = getScheduleTime(currentTime, cronTabEveryMinute);
   t.equal(scheduleTime, '01:00');
+  t.end();
+});
+
+test('it should return scheduled time equal to current time when crontab hour and minutes are * *', (t) => {
+  const currentTime = '16:10';
+  const scheduleTime = getScheduleTime(currentTime, cronTabEveryHourAndMinute);
+  t.equal(scheduleTime, '16:10');
   t.end();
 });
